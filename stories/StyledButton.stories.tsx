@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { StyledButton } from '../components/StyledButton';
+import MDXDocument from './StyledButton.mdx';
 
 export default {
   title: 'StyledButton',
@@ -16,6 +17,11 @@ export default {
       control: { type: 'text' }
     },
   },
+  parameters: {
+    docs: {
+      page: MDXDocument,
+    },
+  },
 } as ComponentMeta<typeof StyledButton>;
 
 const Template: ComponentStory<typeof StyledButton> = (args) => <StyledButton {...args} />;
@@ -24,6 +30,18 @@ export const Primary = Template.bind({});
 Primary.args = {
   variant: 'primary',
   children: 'Primary',
+};
+
+export const Success = Template.bind({});
+Success.args = {
+  variant: 'success',
+  children: 'Success',
+};
+
+export const Transparent = Template.bind({});
+Transparent.args = {
+  variant: 'transparent',
+  children: 'Transparent',
 };
 
 // const incrementAction = action('increment');
