@@ -96,6 +96,12 @@ const StyledLink = styled(BaseLink)`
   font-size: 2em;
 `;
 
+const TextA = styled.span`
+  color: ${(props) => props.theme.colors.red};
+  font-size: ${(props) => props.theme.fontSizes[4]};
+  margin: ${(props) => props.theme.space[2]};
+`;
+
 export default function Home() {
   // const router = useRouter();
   // const onSubmit = () => {
@@ -137,6 +143,7 @@ export default function Home() {
         <ExtendedBorderedText>継承されたボーダーテキスト</ExtendedBorderedText>
         <ExtendedBorderedText as="a" href="/">Go to Index</ExtendedBorderedText>
         <StyledLink href="/">Go to Index</StyledLink>
+        <TextA>Themeから参照したスタイルを使用</TextA>
 
         <p className={styles.description}>
           Get started by editing{' '}
