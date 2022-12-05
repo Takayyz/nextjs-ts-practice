@@ -1,14 +1,100 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
+import Link, { LinkProps } from 'next/link'
 // import Router from 'next/router'
 import styles from '../styles/Home.module.css'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 // import { useRouter } from 'next/router'
 
 const H1 = styled.h1`
 color: red;
-`
+`;
+
+const Badge = styled.span`
+  padding: 8px 16px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  background: red;
+  border-radius: 16px;
+`;
+
+type ButtonProps = {
+  color: string;
+  backgroundColor: string;
+}
+const Button = styled.button<ButtonProps>`
+  color: ${(props) => props.color};
+  background: ${(props) => props.backgroundColor};
+  border: 2px solid ${(props) => props.color};
+
+  font-size: 2em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border-radius: 8px;
+  cursor: pointer;
+`;
+
+// INFO: 赤ボーダー用スタイル
+const redBox = css`
+  padding: 0.25em 1em;
+  border: 3px solid #f00;
+  border-radius: 10px;
+`;
+
+// INFO: 青文字用スタイル
+const font = css`
+  color: #1e90ff;
+  font-size: 2em;
+`;
+
+// INFO: 赤ボーダーと青文字を組み合わせ背景透過のボタン
+const CustomButton = styled.button`
+  background: transparent;
+  margin: 1em;
+  cursor: pointer;
+
+  ${redBox};
+  ${font};
+`;
+
+// INFO: 青文字スタイルを継承し、ボールドで表示するコンポーネント
+const TextBold = styled.p`
+  font-weight: bold;
+
+  ${font};
+`;
+
+const TextBlueBold = styled.p`
+  color: blue;
+  font-weight: bold;
+`;
+
+const ExtendedBorderedText = styled(TextBlueBold)`
+  padding: 8px 16px;
+  border: 3px solid blue;
+  border-radius: 8px;
+`;
+
+type BaseLinkProps = React.PropsWithChildren<LinkProps> & {
+  className?: string;
+  children: React.ReactNode;
+}
+
+const BaseLink = (props: BaseLinkProps) => {
+  const { className, children, ...rest } = props;
+
+  return (
+    <Link {...rest}>
+      <span className={className}>{children}</span>
+    </Link>
+  );
+};
+
+const StyledLink = styled(BaseLink)`
+  color: #1e90ff;
+  font-size: 2em;
+`;
 
 export default function Home() {
   // const router = useRouter();
@@ -36,20 +122,33 @@ export default function Home() {
         <H1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </H1>
+        <Badge>Hello!!!</Badge>
+        <Button
+          color="#f00"
+          backgroundColor="transparent"
+        >Hey, </Button>
+        <Button
+          color="white"
+          backgroundColor="#1e90ff"
+        >You!</Button>
+        <CustomButton>Hahahahaaa!!!</CustomButton>
+        <TextBold>Funny</TextBold>
+        <TextBlueBold>青ボールドテキスト</TextBlueBold>
+        <ExtendedBorderedText>継承されたボーダーテキスト</ExtendedBorderedText>
+        <ExtendedBorderedText as="a" href="/">Go to Index</ExtendedBorderedText>
+        <StyledLink href="/">Go to Index</StyledLink>
 
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
-        <Link href="/ssr">
-          <a>Go To SSR</a>
-        </Link>
+        <Link href="/ssr">Go To SSR</Link>
 
         <Link href={{
           pathname: '/ssg',
           query: { keyword: 'hello' },
         }}>
-          <a>Go To SSG</a>
+          Go To SSG
         </Link>
 
         <Link href="/ssg">
