@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
+import { linkTo } from '@storybook/addon-links';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { StyledButton } from '../components/StyledButton';
 import MDXDocument from './StyledButton.mdx';
@@ -24,6 +25,7 @@ export default {
   },
 } as ComponentMeta<typeof StyledButton>;
 
+// const Template: ComponentStory<typeof StyledButton> = (args) => <StyledButton {...args} onClick={linkTo('StyledButton', 'Success')} />;
 const Template: ComponentStory<typeof StyledButton> = (args) => <StyledButton {...args} />;
 
 export const Primary = Template.bind({});
