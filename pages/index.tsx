@@ -1,8 +1,24 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+import Router from 'next/router'
 import styles from '../styles/Home.module.css'
+// import { useRouter } from 'next/router'
 
 export default function Home() {
+  // const router = useRouter();
+  // const onSubmit = () => {
+  //   router.push('/ssr');
+
+  //   // router.push({
+  //   //   pathname: '/ssg',
+  //   //   query: { keyword: 'hello' },
+  //   // });
+  // };
+
+  // router.reload();
+  // router.back();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,6 +36,20 @@ export default function Home() {
           Get started by editing{' '}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
+        <Link href="/ssr">
+          <a>Go To SSR</a>
+        </Link>
+
+        <Link href={{
+          pathname: '/ssg',
+          query: { keyword: 'hello' },
+        }}>
+          <a>Go To SSG</a>
+        </Link>
+
+        <Link href="/ssg">
+          <button>Jump to SSG</button>
+        </Link>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
